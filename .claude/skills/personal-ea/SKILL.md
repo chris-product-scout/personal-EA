@@ -127,6 +127,85 @@ Chris uses Superhuman with a split inbox. To get emails matching the **News** sp
 1. Use `mcp__gmail-personal__read_email` with the message ID
 2. Summarize key points for the user
 
+---
+
+## Scanned Documents Processing
+
+### Overview
+
+Chris periodically scans batches of physical mail/documents into a single PDF. This workflow helps split, rename, and file them appropriately.
+
+### Tools Required
+
+- **qpdf** (installed via Homebrew): `brew install qpdf`
+
+### File Naming Convention
+
+All files must follow: `YYYY-MM-DD - description.pdf`
+
+- Use the most relevant date from the document (statement date, service date, letter date)
+- Use lowercase with hyphens for the description
+- Examples:
+  - `2025-09-14 - blueshield-eob-christopher.pdf`
+  - `2025-10-26 - principal-life-insurance-statement.pdf`
+  - `2025-11-01 - property-tax-3814-clarke-st.pdf`
+
+### Workflow
+
+1. **Read the scanned PDF** to identify individual documents and page ranges
+2. **Propose splits** with suggested filenames and page ranges as a table
+3. **Get user confirmation** - they may want to merge related docs (e.g., all EOBs for same date)
+4. **Split using qpdf**:
+   ```bash
+   qpdf "source.pdf" --pages . 1-4 -- "2025-01-15 - document-name.pdf"
+   ```
+5. **Review dates** - read individual PDFs to get accurate dates, not just month placeholders
+6. **Confirm destinations** before moving files
+7. **Move files** to appropriate folders
+
+### Common Filing Locations
+
+| Document Type | Destination |
+|---------------|-------------|
+| Blue Shield EOBs | `/Users/chrislee/Dropbox/_Filing Cabinet/Health/` |
+| Dental statements | `/Users/chrislee/Dropbox/_Filing Cabinet/Health/` |
+| Principal Life Insurance | `/Users/chrislee/Dropbox/_Filing Cabinet/Health/Life Insurance - Principal/` |
+| Chase/bank notices | `/Users/chrislee/Dropbox/_Filing Cabinet/Finance/` |
+| Regent property insurance | `/Users/chrislee/Dropbox/_Regent/Insurance/` |
+| Regent mortgage statements | `/Users/chrislee/Dropbox/_Regent/Mortgage Statements/` |
+| Regent property tax | `/Users/chrislee/Dropbox/_Regent/` |
+| Berkeley housing notices | `/Users/chrislee/Dropbox/_Regent/Berkeley Notices/` |
+| Product Scout IRS/FTB notices | `/Users/chrislee/Dropbox/_ProductScout/IRS Notices/` |
+| Personal FTB / tax notices | User decides (often stays on Desktop for action) |
+
+### qpdf Notes
+
+**Fix source PDF first** to avoid warnings during splits:
+```bash
+qpdf --replace-input "2026-01-04 - scanned docs.pdf"
+```
+- Repairs malformed cross-reference tables common in scanned PDFs
+- Warning appears once during fix, creates backup `.~qpdf-orig` file
+- Subsequent splits run cleanly without warnings
+
+### Example Workflow
+
+```bash
+cd "/Users/chrislee/Dropbox/Mac (2)/Desktop"
+
+# 1. Fix the source PDF first
+qpdf --replace-input "2026-01-04 - scanned docs.pdf"
+
+# 2. Split into individual documents (now runs without warnings)
+qpdf "2026-01-04 - scanned docs.pdf" --pages . 1-2 -- "2025-11-01 - property-tax-3814-clarke-st.pdf"
+qpdf "2026-01-04 - scanned docs.pdf" --pages . 3-6 -- "2025-10-01 - insurance-renewal.pdf"
+
+# 3. Clean up backup file
+rm "2026-01-04 - scanned docs.pdf.~qpdf-orig"
+```
+
+---
+
 ## Future Enhancements
 
 - Triage workflows (archive, label, respond)
