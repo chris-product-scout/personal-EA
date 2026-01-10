@@ -32,8 +32,18 @@ Reference files are located in the same directory as this skill:
 - `.claude/skills/stock-investing/references/red-flags.md`
 - `.claude/skills/stock-investing/references/tech-metrics.md`
 - `.claude/skills/stock-investing/references/macro-theses.md`
+- `.claude/skills/stock-investing/references/watchlist.md` - **Active positions, research, and tracking**
+- `.claude/skills/stock-investing/references/quarterly-review.md` - **Quarterly review process and checklists**
+- `.claude/skills/stock-investing/references/investment-journal.md` - **Decision log, thesis evolution, lessons learned**
 
 When a workflow says "READ [filename]", you MUST use the Read tool to load that file before continuing.
+
+## Investment Style
+
+**Quarterly Check-ins**: User prefers buy-and-hold with quarterly monitoring, not active trading.
+- Review positions every quarter (April, July, October, January)
+- Use defined exit criteria rather than reacting to daily price movements
+- Mix of core holdings (stalwarts/ETFs) and satellite positions (fast growers)
 
 ## Interactive Modes
 
@@ -133,6 +143,71 @@ Explain specific frameworks or concepts.
 - O'Glove's earnings quality
 - Rule of 40 and SaaS metrics
 - Tenbagger characteristics
+
+### Mode 7: Quarterly Review
+Structured quarterly portfolio review using the watchlist and review checklists.
+
+**When to Use**: Early April, July, October, or January (or when user says "quarterly review")
+
+**Workflow:**
+1. **READ `references/watchlist.md`** - Load current positions and research
+2. **READ `references/quarterly-review.md`** - Load the review checklist
+3. Gather recent data:
+   - Search for recent earnings/news for each position
+   - Check hyperscaler capex guidance (MSFT, GOOGL, AMZN)
+   - Look for any exit criteria triggers
+4. Walk through the quarterly review checklist:
+   - Macro thesis health check
+   - Individual stock reviews (using stock-specific checklists)
+   - Portfolio allocation review
+   - Watchlist updates
+5. Recommend actions: Hold, Add, Trim, or Sell for each position
+6. Update watchlist.md with new information and insights
+7. Log the review in the Review Log section of quarterly-review.md
+
+### Mode 8: Watchlist Check
+Quick check on watchlist stocks without full quarterly review.
+
+**When to Use**: When user asks about specific stocks on the watchlist, or wants a quick update.
+
+**Workflow:**
+1. **READ `references/watchlist.md`** - Load current positions and research
+2. Search for recent news/earnings on requested stock(s)
+3. Check if any exit criteria have been triggered
+4. Provide brief update: thesis status, any concerns, recommended action
+5. Update watchlist.md if significant new information
+
+### Mode 9: Log Decision
+Record a buy, sell, or research decision in the investment journal.
+
+**When to Use**: After any investment decision or significant research session.
+
+**Workflow:**
+1. **READ `references/investment-journal.md`** - Load the journal
+2. Create a new entry with:
+   - Date and action type (Buy/Sell/Research/Thesis Change)
+   - Stock(s) involved
+   - Reasoning behind the decision
+   - Exit criteria (for buys)
+   - Expected outcome
+3. Update the journal file with the new entry
+4. If this changes a thesis, update the Thesis Evolution Log section
+
+**IMPORTANT**: Always log decisions. This creates an audit trail for learning from past thinking.
+
+### Mode 10: Review Past Decisions
+Review historical decisions to identify patterns and learnings.
+
+**When to Use**: Periodically, or when evaluating performance.
+
+**Workflow:**
+1. **READ `references/investment-journal.md`** - Load the journal
+2. Review past decisions:
+   - Which theses worked? Which didn't?
+   - Were exit criteria triggered appropriately?
+   - What patterns emerge in successful vs unsuccessful decisions?
+3. Update the "Lessons Learned" section with new insights
+4. Suggest process improvements based on patterns
 
 ## Stock Categorization (Lynch Framework)
 
