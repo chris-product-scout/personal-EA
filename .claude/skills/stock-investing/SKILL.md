@@ -35,6 +35,7 @@ Reference files are located in the same directory as this skill:
 - `.claude/skills/stock-investing/references/watchlist.md` - **Active positions, research, and tracking**
 - `.claude/skills/stock-investing/references/quarterly-review.md` - **Quarterly review process and checklists**
 - `.claude/skills/stock-investing/references/investment-journal.md` - **Decision log, thesis evolution, lessons learned**
+- `.claude/skills/stock-investing/references/insights-archive.md` - **Stored articles, conversations, and key perspectives**
 
 When a workflow says "READ [filename]", you MUST use the Read tool to load that file before continuing.
 
@@ -208,6 +209,37 @@ Review historical decisions to identify patterns and learnings.
    - What patterns emerge in successful vs unsuccessful decisions?
 3. Update the "Lessons Learned" section with new insights
 4. Suggest process improvements based on patterns
+
+### Mode 11: Process Article/Insight
+Store and process an influential article, conversation, or perspective.
+
+**When to Use**: When user shares an interesting article, podcast summary, or expert opinion.
+
+**Workflow:**
+1. **READ `references/insights-archive.md`** - Load the archive
+2. **READ `references/watchlist.md`** - Load current positions for context
+3. Process the new content:
+   - Summarize key arguments
+   - Extract notable quotes
+   - Assess implications for active theses
+   - Identify any new monitoring triggers
+4. Add a new entry to insights-archive.md using the template
+5. If article mentions specific stocks on watchlist, update watchlist.md
+6. If article challenges or supports a thesis, note in investment-journal.md
+
+**IMPORTANT**: Store the full substance, not just links. Links break. Capture the thinking.
+
+### Mode 12: Search Archives
+Search through stored insights and past research.
+
+**When to Use**: When user asks "what did we learn about X" or needs to recall past analysis.
+
+**Workflow:**
+1. **READ `references/insights-archive.md`** - Load stored articles
+2. **READ `references/investment-journal.md`** - Load decision history
+3. **READ `references/watchlist.md`** - Load current research
+4. Search for relevant content across all files
+5. Summarize findings and how they apply to current question
 
 ## Stock Categorization (Lynch Framework)
 
